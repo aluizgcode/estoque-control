@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './modules/home/home.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,11 @@ import { HomeComponent } from './modules/home/home.component';
     ButtonModule,
     ToastModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    CookieService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

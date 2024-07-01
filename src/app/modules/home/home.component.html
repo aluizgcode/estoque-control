@@ -13,7 +13,7 @@
             <input type="email" formControlName="email" pInputText placeholder="e-mail">
           </div>
           <div class="flex justify-content-center align-content-center text-align-center mt-3">
-            <input type="password" formControlName="passwd"  pInputText placeholder="senha">
+            <input type="password" formControlName="password"  pInputText placeholder="senha">
           </div>
           <div class="card flex justify-content-center mt-3">
             <button type="submit" pButton pRipple label="Login" [disabled]="!this.loginForm.valid"></button>
@@ -28,7 +28,7 @@
         </p-card>
       </form>
       <!-- Criar conta -->
-      <form>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignupForm()">
         <p-card
           styleClass="mt-10"
           header="Criar conta"
@@ -36,16 +36,16 @@
           *ngIf="!loginCard"
         >
           <div class="flex justify-content-center align-content-center text-align-center">
-            <input type="text" pInputText placeholder="Nome">
+            <input type="text" formControlName="name" pInputText placeholder="Nome">
           </div>
           <div class="flex justify-content-center align-content-center text-align-center mt-3">
-            <input type="email" pInputText placeholder="E-mail">
+            <input type="email" formControlName="email" pInputText placeholder="E-mail">
           </div>
           <div class="flex justify-content-center align-content-center text-align-center mt-3">
-            <input type="password" pInputText placeholder="senha">
+            <input type="password" formControlName="password" pInputText placeholder="senha">
           </div>
           <div class="card flex justify-content-center mt-3">
-            <button type="submit" pButton pRipple label="Criar"></button>
+            <button type="submit" pButton pRipple label="Criar" [disabled]="!this.signupForm.valid"></button>
           </div>
           <span
             class="flex justify-content-center align-content-center text-align-center mt-3 text-red-600 font-semibold"
