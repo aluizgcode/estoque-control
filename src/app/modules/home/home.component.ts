@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
@@ -27,7 +28,8 @@ export class HomeComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private messageService: MessageService
   ) {}
 
   onSubmitLoginForm(): void {
@@ -39,16 +41,33 @@ export class HomeComponent {
         next: (response) => {
           if (response) {
             this.cookieService.set('USER_INFO', response?.token);
-            this.loginForm.reset
+            this.loginForm.reset;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: `Bem vindo de volta ${response?.name}`,
+              life: 3000,
+            });
           }
         },
-        error(err) {
+        error: (err) => {
             console.log(err);
-            alert("As informações de login estão incorretas.");
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Falha',
+              detail: 'Erro ao realizar login',
+              life: 3000,
+            });
         },
       });
     } else {
       console.log(">> Erro ao acessar o serviço de autenticacao");
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Falha',
+        detail: 'Erro ao acessar o serviço de autenticacao',
+        life: 3000,
+      })
     }
   }
 
@@ -61,19 +80,35 @@ export class HomeComponent {
         next: (response) => {
           if (response) {
             console.log(">> Usuário criado com sucesso");
-            alert("Usuario criado com sucesso");
             this.signupForm.reset;
             this.loginForm.reset;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: 'Usuário criado com sucesso',
+              life: 3000,
+            });
             this.loginCard = true;
           }
         },
         error: (err) => {
           console.log(err);
-          alert("Erro ao criar o usuário");
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Falha',
+            detail: 'Erro ao criar usuário',
+            life: 3000,
+          })
         }
       })
     } else {
       console.log(">> Formulario invalido");
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Falha',
+        detail: 'Dados inválidos',
+        life: 3000,
+      })
     }
   }
 }

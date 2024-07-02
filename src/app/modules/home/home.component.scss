@@ -10,3 +10,9 @@
     background-position: top;
   }
 }
+// Responsividade da tela
+@media screen and (min-width: 1000px) {
+  .grid {
+    height: 100vmax;
+  }
+}
