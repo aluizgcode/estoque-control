@@ -2,4 +2,5 @@
 <app-products-table
   [products]="productsDatas"
   (productEvent)="handleProductAction($event)"
+  (deleteProductEvent)="handleDeleteProductAction($event)"
 ></app-products-table>
